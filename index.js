@@ -2,9 +2,11 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import api from './api'
-import { errorHandler as queryErrorHandler } from 'querymen'
-import { errorHandler as bodyErrorHandler } from 'bodymen'
+import {errorHandler as queryErrorHandler} from 'querymen'
+import {errorHandler as bodyErrorHandler} from 'bodymen'
 import mongoose from './services/mongoose'
+
+require("dotenv").config()
 
 const index = express()
 const genericErrorHandler = (err, req, res, next) => {

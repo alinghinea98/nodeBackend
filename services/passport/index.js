@@ -1,8 +1,7 @@
 import passport from 'passport'
-import { model as userData, roles as userRoles } from '../../api/users/model'
-import _ from 'lodash'
-import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt'
-import { BasicStrategy } from 'passport-http'
+import {model as userData, roles as userRoles} from '../../api/users/model'
+import {ExtractJwt, Strategy as JwtStrategy} from 'passport-jwt'
+import {BasicStrategy} from 'passport-http'
 import bcrypt from 'bcryptjs'
 
 export const password = () => (req, res, next) => passport.authenticate('basic', { session: false }, (err, user, msg) => {
@@ -34,7 +33,7 @@ export const token = ({ required, roles = userRoles } = {}) => (req, res, next) 
 })(req, res, next)
 
 passport.use(new BasicStrategy(async (email, password, done) => {
-  const user = await userData.findOne({ email: email.toLowerCase() })
+  const user = await userData.findOne({ username: email.toLowerCase() })
   console.log(user)
   if (!user) {
     return done(null, false)
