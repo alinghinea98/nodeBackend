@@ -35,11 +35,15 @@ export const schema = {
       type: String,
       required: true
     },
-    name: {
+    firstName: {
       type: String
     },
-    surname: {
+    lastName: {
       type: String
+    },
+    gender: {
+      type: String,
+      default: 'unknown'
     },
     deleted: {
       type: Boolean,
@@ -79,11 +83,15 @@ export const schema = {
     phone: {
       type: String
     },
-    name: {
+    firstName: {
       type: String
     },
-    surname: {
+    lastName: {
       type: String
+    },
+    gender: {
+      type: String,
+      default: 'unknown'
     },
     deleted: {
       type: Boolean,
