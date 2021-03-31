@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import bcrypt from 'bcryptjs'
-import {model} from './model'
+import { model } from './model'
 
 export const actions = {
   async get ({ querymen }, res, next) {
@@ -8,7 +8,7 @@ export const actions = {
       const users = await model.find(querymen.query)
       console.log(users)
       return res.status(201).json(users)
-    } catch (e) {
+    } catch (e) { console.log(e)
       console.log(e)
       next()
     }
@@ -19,7 +19,7 @@ export const actions = {
       const obj = { ...(bodymen.body), createdAt: _.now(), password }
       const user = await model.create(obj)
       return res.status(201).json(user)
-    } catch (e) {
+    } catch (e) { console.log(e)
       next()
     }
   },
@@ -29,7 +29,7 @@ export const actions = {
       await model.updateOne({ username: params.username }, body, { useFindAndModify: false })
       const user = await model.findOne({ username: params.username })
       return res.status(201).json(user)
-    } catch (e) {
+    } catch (e) { console.log(e)
       console.log(e)
       next()
     }
@@ -38,7 +38,7 @@ export const actions = {
     try {
       model.delete({ params })
       return res.status(201).json({ status: 'done' })
-    } catch (e) {
+    } catch (e) { console.log(e)
       next()
     }
   }

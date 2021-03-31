@@ -6,7 +6,7 @@ export const actions = {
         try {
             const alerts = await model.find(querymen.query)
             return res.status(201).json(alerts)
-        } catch (e) {
+        } catch (e) { console.log(e)
             next()
         }
     },
@@ -14,7 +14,7 @@ export const actions = {
         try {
             const alert = await model.create(bodymen.body)
             return res.status(201).json(alert)
-        } catch (e) {
+        } catch (e) { console.log(e)
             next()
         }
     },
@@ -22,7 +22,7 @@ export const actions = {
         try {
             model.delete({ params })
             return res.status(201).json({ status: 'done' })
-        } catch (e) {
+        } catch (e) { console.log(e)
             next()
         }
     }

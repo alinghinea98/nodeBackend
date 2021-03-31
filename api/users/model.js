@@ -50,7 +50,8 @@ export const schema = {
       default: false
     },
     pin: {
-      type: String
+      type: String,
+      unique: true
     },
     kit: {
       type: mongoose.Types.ObjectId,
@@ -96,7 +97,8 @@ export const schema = {
       type: Boolean
     },
     pin: {
-      type: String
+      type: String,
+      unique: true
     },
     kit: {
       type: mongoose.Types.ObjectId,
@@ -142,7 +144,8 @@ export const schema = {
       type: Boolean
     },
     pin: {
-      type: String
+      type: String,
+      unique: true
     },
     kit: {
       type: mongoose.Types.ObjectId,

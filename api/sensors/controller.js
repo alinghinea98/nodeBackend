@@ -6,7 +6,7 @@ export const actions = {
       const sensors = await model.find(querymen.query).populate('values', '_id value createdAt', 'sensorsValues')
         .exec()
       return res.json(sensors)
-    } catch (e) {
+    } catch (e) { console.log(e)
       next()
     }
   },
@@ -14,7 +14,7 @@ export const actions = {
     try {
       const sensors = await model.findById(params.id, querymen.query)
       return res.status(201).json(sensors)
-    } catch (e) {
+    } catch (e) { console.log(e)
       next()
     }
   },
@@ -22,7 +22,7 @@ export const actions = {
     try {
       const sensor = await model.create(bodymen.body)
       return res.status(201).send(sensor)
-    } catch (e) {
+    } catch (e) { console.log(e)
       next()
     }
   },
@@ -30,7 +30,7 @@ export const actions = {
     try {
       model.delete({ params })
       return res.status(201).json({ status: 'done' })
-    } catch (e) {
+    } catch (e) { console.log(e)
       next()
     }
   }
