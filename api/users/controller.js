@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import bcrypt from 'bcryptjs'
-import { model } from './model'
+import {model} from './model'
+
 export const actions = {
   async get ({ querymen }, res, next) {
     try {
@@ -15,6 +16,14 @@ export const actions = {
       const password = await bcrypt.hash(bodymen.body.password, 4).catch(next)
       const obj = { ...(bodymen.body), createdAt: _.now(), password }
       const user = await model.create(obj)
+      return res.status(201).json(user)
+    } catch (e) {
+      next()
+    }
+  },
+  async update ({ bodymen, params }, res, next) {
+    try {
+      const user = await model.updateOne({_id:  params.id}, bodymen.body)
       return res.status(201).json(user)
     } catch (e) {
       next()
