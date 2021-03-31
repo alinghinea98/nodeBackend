@@ -41,8 +41,9 @@ export const schema = {
     surname: {
       type: String
     },
-    IS_DELETED: {
-      type: Boolean
+    deleted: {
+      type: Boolean,
+      default: false
     },
     pin: {
       type: String
@@ -84,8 +85,9 @@ export const schema = {
     surname: {
       type: String
     },
-    IS_DELETED: {
-      type: Boolean
+    deleted: {
+      type: Boolean,
+      default: false
     },
     pin: {
       type: String
