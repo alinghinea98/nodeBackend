@@ -6,8 +6,10 @@ export const actions = {
   async get ({ querymen }, res, next) {
     try {
       const users = await model.find(querymen.query)
+      console.log(users)
       return res.status(201).json(users)
     } catch (e) {
+      console.log(e)
       next()
     }
   },
@@ -23,9 +25,12 @@ export const actions = {
   },
   async update ({ bodymen, params }, res, next) {
     try {
-      const user = await model.updateOne({_id:  params.id}, bodymen.body)
+      const body = _.pickBy(bodymen.body, (v) => v !== undefined)
+      await model.updateOne({ username: params.username }, body, { useFindAndModify: false })
+      const user = await model.findOne({ username: params.username })
       return res.status(201).json(user)
     } catch (e) {
+      console.log(e)
       next()
     }
   },

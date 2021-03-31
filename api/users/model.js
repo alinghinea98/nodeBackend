@@ -54,7 +54,7 @@ export const schema = {
     },
     kit: {
       type: mongoose.Types.ObjectId,
-      ref: "kits"
+      ref: 'kits'
     }
   },
   query: {
@@ -90,19 +90,63 @@ export const schema = {
       type: String
     },
     gender: {
-      type: String,
-      default: 'unknown'
+      type: String
     },
     deleted: {
-      type: Boolean,
-      default: false
+      type: Boolean
     },
     pin: {
       type: String
     },
     kit: {
       type: mongoose.Types.ObjectId,
-      ref: "kits"
+      ref: 'kits'
+    }
+  },
+  update: {
+    username: {
+      type: String,
+      unique: true,
+      trim: true,
+      minlength: 4,
+      lowercase: true
+    },
+    email: {
+      type: String,
+      match: /^\S+@\S+\.\S+$/,
+      unique: true,
+      trim: true,
+      lowercase: true
+    },
+    password: {
+      type: String,
+      minlength: 4
+    },
+    role: {
+      type: String,
+      enum: roles
+    },
+    phone: {
+      type: String
+    },
+    firstName: {
+      type: String
+    },
+    lastName: {
+      type: String
+    },
+    gender: {
+      type: String
+    },
+    deleted: {
+      type: Boolean
+    },
+    pin: {
+      type: String
+    },
+    kit: {
+      type: mongoose.Types.ObjectId,
+      ref: 'kits'
     }
   }
 }

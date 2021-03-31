@@ -13,6 +13,6 @@ router.post('/', body(schema.create), actions.create)
 
 router.delete('/:id', token({ required: true }), actions.delete)
 
-router.put('/:id', token({ required: true }), actions.update)
+router.put('/:username', token({ required: true }), body(schema.update), actions.update)
 
 export default router
