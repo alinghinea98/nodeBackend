@@ -34,11 +34,10 @@ export const actions = {
       next()
     }
   },
-  async getByPin ({ querymen }, res, next) {
+  async getByPin ({ bodymen, params }, res, next) {
     try {
-      const users = await model.findOne(querymen.query)
-      console.log(users)
-      return res.status(200).json(users)
+      const user = await model.findOne({ pin: params.pin })
+      return res.status(200).json(user)
     } catch (e) {
       next()
     }
