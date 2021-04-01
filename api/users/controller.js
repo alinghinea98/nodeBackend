@@ -7,7 +7,7 @@ export const actions = {
     try {
       const users = await model.find(querymen.query)
       console.log(users)
-      return res.status(201).json(users)
+      return res.status(200).json(users)
     } catch (e) { console.log(e)
       console.log(e)
       next()
