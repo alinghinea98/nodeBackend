@@ -8,7 +8,7 @@ export const actions = {
       const users = await model.find(querymen.query)
       console.log(users)
       return res.status(200).json(users)
-    } catch (e) { console.log(e)
+    } catch (e) {
       console.log(e)
       next()
     }
@@ -31,6 +31,15 @@ export const actions = {
       return res.status(201).json(user)
     } catch (e) { console.log(e)
       console.log(e)
+      next()
+    }
+  },
+  async getByPin ({ querymen }, res, next) {
+    try {
+      const users = await model.findOne(querymen.query)
+      console.log(users)
+      return res.status(200).json(users)
+    } catch (e) {
       next()
     }
   },

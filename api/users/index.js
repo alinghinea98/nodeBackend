@@ -15,4 +15,6 @@ router.delete('/:id', token({ required: true }), actions.delete)
 
 router.put('/:username', token({ required: true }), body(schema.update), actions.update)
 
+router.put('/:pin', token({ required: true }), body(schema.query), actions.getByPin)
+
 export default router
