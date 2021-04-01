@@ -59,9 +59,7 @@ passport.use(
     ({ id }, done) => {
       userData.findById(id)
         .then(user => {
-          console.log(user)
           user.view().then(() => {
-            console.log(user)
             done(null, user)
             return null
           })
