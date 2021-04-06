@@ -47,7 +47,16 @@ export const actions = {
   },
   async getByPin ({ bodymen, params }, res, next) {
     try {
-      const user = await model.findOne({ pin: params.pin })
+      const user = await model.findOne({ pin: params.pin }).populate([{
+        path: 'kit',
+        model: 'kits',
+        populate: {
+          path: 'sensorsIds',
+          model: 'sensors',
+          populate: { path: 'values', model: 'sensorsValues', options: { limit: 5 } }
+        }
+      }])
+        .exec()
       return res.status(200).json(user)
     } catch (e) {
       next()
