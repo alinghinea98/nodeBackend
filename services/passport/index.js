@@ -18,7 +18,10 @@ export const password = () => (req, res, next) => passport.authenticate('basic',
     next()
   })
 })(req, res, next)
-export const token = ({ required, roles = userRoles } = {}) => (req, res, next) => passport.authenticate('token', { session: false }, (err, user) => {
+export const token = ({
+  required,
+  roles = userRoles
+} = {}) => (req, res, next) => passport.authenticate('token', { session: false }, (err, user) => {
   if (err || (required && !user) || (required && !~roles.indexOf(user.role))) {
     return res.status(401).end()
   }
@@ -33,7 +36,16 @@ export const token = ({ required, roles = userRoles } = {}) => (req, res, next) 
 })(req, res, next)
 
 passport.use(new BasicStrategy(async (email, password, done) => {
-  const user = await userData.findOne({ username: email.toLowerCase() })
+  const user = await userData.findOne({ username: email.toLowerCase() }).populate([{
+    path: 'kit',
+    model: 'kits',
+    populate: {
+      path: 'sensorsIds',
+      model: 'sensors',
+      populate: { path: 'values', model: 'sensorsValues', options: { limit: 5 } }
+    }
+  }])
+    .exec()
   if (!user) {
     return done(null, false)
   }
