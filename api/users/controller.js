@@ -5,7 +5,16 @@ import { model } from './model'
 export const actions = {
   async get ({ querymen }, res, next) {
     try {
-      const users = await model.find(querymen.query)
+      const users = await model.find(querymen.query).populate([{
+        path: 'kit',
+        model: 'kits',
+        populate: {
+          path: 'sensorsIds',
+          model: 'sensors',
+          populate: { path: 'values', model: 'sensorsValues', options: { limit: 5 } }
+        }
+      }])
+        .exec()
       console.log(users)
       return res.status(200).json(users)
     } catch (e) {
@@ -19,7 +28,8 @@ export const actions = {
       const obj = { ...(bodymen.body), createdAt: _.now(), password }
       const user = await model.create(obj)
       return res.status(201).json(user)
-    } catch (e) { console.log(e)
+    } catch (e) {
+      console.log(e)
       next()
     }
   },
@@ -29,7 +39,8 @@ export const actions = {
       await model.updateOne({ username: params.username }, body, { useFindAndModify: false })
       const user = await model.findOne({ username: params.username })
       return res.status(201).json(user)
-    } catch (e) { console.log(e)
+    } catch (e) {
+      console.log(e)
       console.log(e)
       next()
     }
@@ -46,7 +57,8 @@ export const actions = {
     try {
       model.delete({ params })
       return res.status(201).json({ status: 'done' })
-    } catch (e) { console.log(e)
+    } catch (e) {
+      console.log(e)
       next()
     }
   }

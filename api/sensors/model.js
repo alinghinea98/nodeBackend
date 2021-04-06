@@ -18,7 +18,7 @@ export const schema =
         type: String
       },
       type: { type: String },
-      value: [{
+      values: [{
         type: mongoose.Types.ObjectId,
         ref: 'sensorsValues'
       }]

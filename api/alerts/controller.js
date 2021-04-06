@@ -5,7 +5,7 @@ import { model } from './model'
 export const actions = {
   async get ({ querymen }, res, next) {
     try {
-      const alerts = await model.find(querymen.query).populate('userId', '', 'users')
+      const alerts = await model.find(querymen.query).populate([{ path: 'userId', model: 'users' }])
         .exec()
       return res.status(200).json(alerts)
     } catch (e) {
@@ -26,7 +26,7 @@ export const actions = {
     try {
       const body = _.pickBy(bodymen.body, (v) => v !== undefined)
       await model.updateOne({ _id: params.id }, body, { useFindAndModify: false })
-      const user = await model.findOne({ _id: params.id }).populate('userId', '', 'users')
+      const user = await model.findOne({ _id: params.id }).populate([{ path: 'userId', model: 'users' }])
         .exec()
       return res.status(201).json(user)
     } catch (e) {

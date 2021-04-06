@@ -57,7 +57,15 @@ passport.use(
       ])
     },
     ({ id }, done) => {
-      userData.findById(id)
+      userData.findById(id).populate([{
+        path: 'kit',
+        model: 'kits',
+        populate: {
+          path: 'sensorsIds',
+          model: 'sensors',
+          populate: { path: 'values', model: 'sensorsValues', options: { limit: 5 } }
+        }
+      }]).exec()
         .then(user => {
           user.view().then(() => {
             done(null, user)
