@@ -5,12 +5,6 @@ export const roles = ['end-user', 'care-giver', 'admin']
 
 export const schema = {
   create: {
-    sensorType: {
-      type: String,
-      required: true,
-      trim: true,
-      lowercase: true
-    },
     description: {
       type: String,
       required: true,
@@ -31,11 +25,6 @@ export const schema = {
     }
   },
   query: {
-    sensorType: {
-      type: String,
-      trim: true,
-      lowercase: true
-    },
     description: {
       type: String,
       trim: true,
@@ -53,11 +42,6 @@ export const schema = {
     }
   },
   update: {
-    sensorType: {
-      type: String,
-      trim: true,
-      lowercase: true
-    },
     description: {
       type: String,
       trim: true,
