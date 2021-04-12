@@ -17,7 +17,7 @@ router.post('/', token({ required: true }), body(schema.create), actions.create)
 
 router.delete('/:id', token({ required: true }), actions.delete)
 
-router.get('/byId/:id', token({ required: true }), query(schema.query), actions.getById)
+router.get('/:code', token({ required: true }), query(schema.query), actions.getById)
 
 
 export default router
