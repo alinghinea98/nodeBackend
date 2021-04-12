@@ -14,7 +14,7 @@ export const actions = {
   },
   async getById ({ bodymen, params }, res, next) {
     try {
-      const user = await model.findOne({ code: params.id }).populate('sensorsIds', '_id name value', 'sensors')
+      const user = await model.find({ code: params.id }).populate('sensorsIds', '_id name value', 'sensors')
           .exec()
       return res.status(200).json(user)
     } catch (e) {
