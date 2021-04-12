@@ -23,7 +23,7 @@ export const actions = {
   },
   async show ({ querymen, params }, res, next) {
     try {
-      const kits = await model.findById(params.id, querymen.query)
+      const kits = await model.findOne(params.id, querymen.query)
       return res.status(201).json(kits)
     } catch (e) {
       console.log(e)
