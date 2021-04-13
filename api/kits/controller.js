@@ -3,7 +3,11 @@ import { model } from './model'
 export const actions = {
   async get ({ querymen }, res, next) {
     try {
-      const kits = await model.find(querymen.query).populate('sensorsIds', '_id name value', 'sensors')
+      const kits = await model.find(querymen.query).populate([{
+        path: 'sensorsIds',
+        model: 'sensors',
+        populate: { path: 'values', model: 'sensorsValues', options: { limit: 5 } }
+      }])
         .exec()
       return res.status(200).json(kits)
     } catch (e) {
@@ -14,7 +18,11 @@ export const actions = {
   },
   async getOne ({ bodymen, params }, res, next) {
     try {
-      const kits = await model.findOne({ _id: params.id }).populate('sensorsIds', '_id name value', 'sensors')
+      const kits = await model.findOne({ _id: params.id }).populate([{
+        path: 'sensorsIds',
+        model: 'sensors',
+        populate: { path: 'values', model: 'sensorsValues', options: { limit: 5 } }
+      }])
         .exec()
       return res.status(200).json(kits)
     } catch (e) {
