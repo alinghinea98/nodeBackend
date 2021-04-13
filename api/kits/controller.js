@@ -12,10 +12,20 @@ export const actions = {
       next()
     }
   },
+  async getOne ({ bodymen, params }, res, next) {
+    try {
+      const kits = await model.findOne({ _id: params.id }).populate('sensorsIds', '_id name value', 'sensors')
+        .exec()
+      return res.status(200).json(kits)
+    } catch (e) {
+      console.log(e)
+      next()
+    }
+  },
   async show ({ querymen, params }, res, next) {
     try {
       const kits = await model.findById(params.id, querymen.query)
-      return res.status(201).json(kits)
+      return res.status(200).json(kits)
     } catch (e) {
       console.log(e)
       next()

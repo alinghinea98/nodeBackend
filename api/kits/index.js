@@ -9,13 +9,14 @@ const router = new Router()
 
 router.get('/', token({ required: true }), query(schema.query), actions.get)
 
-router.get('/:id', token({ required: true }), actions.show)
+// router.get('/:id', token({ required: true }), actions.show)
+
+router.get('/:id', token({ required: true }), query(schema.query), actions.getOne)
 
 router.post('/', token({ required: true }), body(schema.create), actions.create)
 
 // router.put('/:id', token({ required: true }), body(schema.update), actions.update)
 
 router.delete('/:id', token({ required: true }), actions.delete)
-
 
 export default router
